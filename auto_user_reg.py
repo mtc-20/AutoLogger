@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Dec 13 19:47:51 2019
+
+@author: mtc-20
+"""
+
+import pickle
+import cv2
+
+# To create the file the first time when there are already existing users
+#workers=['Abir','Quang', 'Thomas', 'Prof Hartanto']
+#with open('users.txt', 'wb') as f:
+#    pickle.dump(workers, f)
+
+# Add block to check for existence of file
+    
+# This assumes the file already exists    
+with open('users.txt', 'rb') as f:
+    users = pickle.load(f)   
+
+def save_image(name):
+    cap = cv2.VideoCapture(0)
+    width  = int(cap.get(cv2.cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+#    print(width, height)
+    
+    # Specify ROI coordinates
+    x1, y1 = int(width/4), int(height/4)
+    x2, y2 = int(width*3/4), int(height*3/4)
+    while True:
+        ret, frame = cap.read()
+        if ret is None:
+            print("[INFO] No feed found...")
+            print("Exiting!")
+            break
+        roi = frame[(y1 + 5):(y2 -5), int(x1 + 5):int(x2 - 5)]
+
+        cv2.rectangle(frame, (x1, y1), (x2, y2), (200,0,0), 3)
+        text = "Ensure entire face is positioned \n within the rectangle \n and press SPACE to confirm"
+        y0, dy = (height - 80), 30
+        for i, line in enumerate(text.split('\n')):
+            y = y0 + i*dy
+            cv2.putText(frame, line, (10, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 2)
+#        cv2.putText(frame, "Ensure face is within the Rectangle and press SPACE to confirm", (10,height-30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,200),1)
+            
+        cv2.imshow('frame', frame)
+        k = cv2.waitKey(1) & 0xFF
+        if k == 27:
+            print("[INFO] Exiting...")
+            break
+        elif k ==32:
+            #name = 'Thomas'
+            img_name = "{}.jpg".format(name)
+            cv2.imwrite(img_name, roi)
+            print("{} written!".format(img_name))
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+    
+def add_new_user():
+    # username entry
+    name = input("Please enter first name: ")
+#    with open('users.txt', 'rb') as f:
+#        users = pickle.load(f)
+        
+    while name in users:
+        print("Username [%s] already exists!!!" % name)
+        print("Please try again!")
+        name = input("Please enter first name: ")
+    print("[INFO] No duplicate found...")
+    users.append(name)
+    #cap = cv2.VideoCapture(0)
+    print("[INFO] Loading camera...")
+    save_image(name)
+    print("[INFO] Registering user to database...")
+    
+    with open('users.txt', 'wb') as f:
+        pickle.dump(users, f)
+        
+    with open('users.txt', 'rb') as fp:
+        print(pickle.load(fp))
+    
+#add_new_user()        

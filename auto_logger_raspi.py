@@ -7,7 +7,8 @@ Created on Sun Nov 24 19:59:49 2019
 TODO: [x] add LD_PRELOAD to .bashrc
 TODO: [x] fix lcoation of imshow windows
 TODO: [ ] reduce false positives of hand recognition
-TODO: [ ] automate new user creation
+TODO: [+] automate new user creation; need to reload database on successful registration
+TODO: [ ] improve model loading by using encoding only
 @todo check me
 
 """
@@ -20,6 +21,9 @@ import glob
 from datetime import datetime
 import math
 import time
+from auto_user_reg import *
+
+print("List of existing users: ", users)
 
 faces=glob.glob("faces/*.jpg")
 #print(faces)
@@ -37,6 +41,9 @@ faces=glob.glob("faces/*.jpg")
 # Get a reference to webcam #0 (the default one)
 known_face_encodings=[]
 known_face_names=[]
+
+print("[INFO] Loading user database...")
+
 for face in faces:
     image=face_recognition.load_image_file(face)
     encoding=face_recognition.face_encodings(image)[0]
@@ -76,11 +83,14 @@ cv2.moveWindow('Video', 40, 40)
 while True:
     process_this_frame = True
     count=0
-    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto']
+    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
     name='dummy'
 
-    user_input=input('Press y then [ENTER] to use me: \n')
-    if user_input=='y':
+    user_input=input('Press u to create new user or \n Press y then [ENTER] to use me: \n')
+    if user_input.lower() == 'u':
+        add_new_user()
+        
+    elif user_input=='y':
         video_capture = cv2.VideoCapture(0)
         video_capture.set(cv2.cv2.CAP_PROP_FPS, 1)
         while True:
