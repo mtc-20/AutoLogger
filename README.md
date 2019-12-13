@@ -3,6 +3,8 @@
 
 Files are created daily to store check-in and check out of users with timestamps. The logging directory maintains a heirarchy based on year and month.
 
+System currently requires keyboard to accept input/awake from sleep.
+
 ### TODO
 - [ ] Automate new user creation process
 - [ ] Make system completely hands-free
