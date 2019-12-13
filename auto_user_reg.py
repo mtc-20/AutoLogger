@@ -8,6 +8,7 @@ Created on Fri Dec 13 19:47:51 2019
 
 import pickle
 import cv2
+import face_recognition
 
 # To create the file the first time when there are already existing users
 #workers=['Abir','Quang', 'Thomas', 'Prof Hartanto']
@@ -18,13 +19,16 @@ import cv2
     
 # This assumes the file already exists    
 with open('users.txt', 'rb') as f:
-    users = pickle.load(f)   
+    users = pickle.load(f) 
+    
+with open('encodings.txt', 'rb') as f:
+    known_face_encodings = pickle.load(f)
 
 def save_image(name):
     cap = cv2.VideoCapture(0)
     width  = int(cap.get(cv2.cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-#    print(width, height)
+    print(width, height)
     
     # Specify ROI coordinates
     x1, y1 = int(width/4), int(height/4)
@@ -34,11 +38,13 @@ def save_image(name):
         if ret is None:
             print("[INFO] No feed found...")
             print("Exiting!")
+            chk = False
             break
         roi = frame[(y1 + 5):(y2 -5), int(x1 + 5):int(x2 - 5)]
 
         cv2.rectangle(frame, (x1, y1), (x2, y2), (200,0,0), 3)
         text = "Ensure entire face is positioned \n within the rectangle \n and press SPACE to confirm"
+        
         y0, dy = (height - 80), 30
         for i, line in enumerate(text.split('\n')):
             y = y0 + i*dy
@@ -48,6 +54,7 @@ def save_image(name):
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1) & 0xFF
         if k == 27:
+            chk = False
             print("[INFO] Exiting...")
             break
         elif k ==32:
@@ -55,32 +62,53 @@ def save_image(name):
             img_name = "{}.jpg".format(name)
             cv2.imwrite(img_name, roi)
             print("{} written!".format(img_name))
+            chk = True
             break
     cap.release()
     cv2.destroyAllWindows()
+    return chk
 
+
+
+
+    
     
 def add_new_user():
     # username entry
     name = input("Please enter first name: ")
-#    with open('users.txt', 'rb') as f:
-#        users = pickle.load(f)
         
     while name in users:
         print("Username [%s] already exists!!!" % name)
         print("Please try again!")
         name = input("Please enter first name: ")
+    
     print("[INFO] No duplicate found...")
     users.append(name)
     #cap = cv2.VideoCapture(0)
     print("[INFO] Loading camera...")
-    save_image(name)
-    print("[INFO] Registering user to database...")
-    
-    with open('users.txt', 'wb') as f:
-        pickle.dump(users, f)
+#    result = save_image(name)
+    # extract encodings
+    if save_image(name):
+        image_path = "faces/{}.jpg".format(name)
+        img = face_recognition.load_image_file(image_path)
+        encoding=face_recognition.face_encodings(image)[0]
+        known_face_encodings.append(encoding) 
         
-    with open('users.txt', 'rb') as fp:
-        print(pickle.load(fp))
+        print("[INFO] Registering user to database...")
     
-#add_new_user()        
+        with open('users.txt', 'wb') as f:
+            pickle.dump(users, f)
+        
+        with open('encodings.txt', 'wb') as f:
+            pickle.dump(known_face_encodings, f)
+
+        # Check updated files      
+        with open('users.txt', 'rb') as fp:
+            print(pickle.load(fp))
+    
+    else:
+        print("[INFO] User registration interrupted...")
+        
+    
+    
+add_new_user()        

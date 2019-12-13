@@ -2,12 +2,12 @@
 """
 Created on Sun Nov 24 19:59:49 2019
 
-@author: spidey, mtc-20
+@author: spidey, mtc-20, quangnhat185
 
 TODO: [x] add LD_PRELOAD to .bashrc
 TODO: [x] fix lcoation of imshow windows
 TODO: [ ] reduce false positives of hand recognition
-TODO: [+] automate new user creation; need to reload database on successful registration
+TODO: [x] automate new user creation; need to reload database on successful registration
 TODO: [ ] improve model loading by using encoding only
 @todo check me
 
@@ -44,13 +44,25 @@ known_face_names=[]
 
 print("[INFO] Loading user database...")
 
-for face in faces:
-    image=face_recognition.load_image_file(face)
-    encoding=face_recognition.face_encodings(image)[0]
-    known_face_encodings.append(encoding)
-    slash_ind=face.find('/')
-    dot_index=face.find('.')
-    known_face_names.append(face[slash_ind+1:dot_index])
+#for face in faces:
+#    image=face_recognition.load_image_file(face)
+#    encoding=face_recognition.face_encodings(image)[0]
+#    known_face_encodings.append(encoding)
+#    slash_ind=face.find('/')
+#    dot_index=face.find('.')
+#    known_face_names.append(face[slash_ind+1:dot_index])
+
+#with open('users.txt', 'wb') as f:
+#    pickle.dump(known_face_names, f)
+#    
+#with open('encodings.txt', 'wb') as f:
+#    pickle.dump(known_face_encodings, f)
+
+# Assumes names and encodings have already been written to file    
+#with open('users.txt', 'rb') as f:
+#    known_face_names = pickle.load(f)
+    
+
     
 print(known_face_names)
     
