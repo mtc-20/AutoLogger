@@ -2,7 +2,14 @@
 """
 Created on Sun Nov 24 19:59:49 2019
 
-@author: spidey
+@author: spidey, mtc-20
+
+TODO: [x] add LD_PRELOAD to .bashrc
+TODO: [x] fix lcoation of imshow windows
+TODO: [ ] reduce false positives of hand recognition
+TODO: [ ] automate new user creation
+@todo check me
+
 """
 #LD_PRELOAD='/usr/lib/arm-linux-gnueabihf/libatomic.so.1.2.0 python3'
 import face_recognition
@@ -64,13 +71,15 @@ face_locations = []
 face_encodings = []
 face_names = []
 '''
+cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+cv2.moveWindow('Video', 40, 40)
 while True:
     process_this_frame = True
     count=0
     workers=['Abir','Quang', 'Thomas', 'Prof Hartanto']
     name='dummy'
 
-    user_input=input('Press y to use me')
+    user_input=input('Press y then [ENTER] to use me: \n')
     if user_input=='y':
         video_capture = cv2.VideoCapture(0)
         video_capture.set(cv2.cv2.CAP_PROP_FPS, 1)
@@ -150,6 +159,9 @@ while True:
         entry=''  
         count_in=0
         count_out=0 
+        cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
+        cv2.moveWindow('frame', 40, 40)
+        
         while(True):
             try:    
                 ret, frame = cap.read()
@@ -183,7 +195,7 @@ while True:
                 
                 
             #find contours
-                contours,hierarchy= cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+                contours,hierarchy = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
             
                #find contour of max area(hand)
                 cnt = max(contours, key = lambda x: cv2.contourArea(x))
@@ -217,7 +229,7 @@ while True:
                     end = tuple(approx[e][0])
                     far = tuple(approx[f][0])
                     pt= (100,180)
-                    
+                    strftime("%B")
                     
                     # find length of all sides of triangle
                     a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)
@@ -259,7 +271,7 @@ while True:
                             count_in+=1
                            
                         else:
-                            cv2.putText(frame,'Could not recognize try again',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
+                            cv2.putText(frame,'Could not recognize, try again',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
                             
                 elif l==2:
                     cv2.putText(frame,'Could not recognize try again',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
@@ -293,6 +305,7 @@ while True:
                     break
                     
                 #show the windows
+                
                 cv2.imshow('mask',mask)
                 cv2.imshow('frame',frame)
             except:pass
@@ -311,7 +324,9 @@ while True:
 
 
 
-
+# Data Logger
+        # TODO: should a person be allowed to log-in multiple times???
+        # 
 
         now=datetime.now()
         log=os.listdir('logbook/')
@@ -330,14 +345,13 @@ while True:
         file_path="logbook/"+(now.strftime("%B")+' '+year)
         file_name=day+'-'+month+'-'+year+'.txt'
         full_path=os.path.join(file_path, file_name)
-        if day+'-'+month+'-'+year+'.txt' not in day_glob:
+        if day+'-'+month+'-'+year+'.txt' not in day_glob: # create new file? Then check out shouldn't happen
             f=open(full_path,"a+")
             if 'in' in entry:
                 f.write('[Check In++] Username: '+name+' '+day+'-'+ str(now.month) +'-'+year+' '+ str(now.strftime("%H:%M"))+'\n')
-            else:
-                f.write('[--Check Out] Username: '+name+' '+day+'-'+ str(now.month) +'-'+year+' '+str(now.strftime("%H:%M"))+'\n') 
+            
         else:
-            f=open(full_path,"r")
+            f=open(full_path,"r")                       # 
             a=f.read()
             #f=open(full_path,"a+")
             if 'in' in entry:
