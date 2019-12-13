@@ -6,6 +6,6 @@ Files are created daily to store check-in and check out of users with timestamps
 System currently requires keyboard to accept input/awake from sleep.
 
 ### TODO
-- [ ] Automate new user creation process
+- [x] Automate new user creation process
 - [ ] Make system completely hands-free
 
