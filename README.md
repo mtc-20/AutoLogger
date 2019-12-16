@@ -7,5 +7,6 @@ System currently requires keyboard to accept input/awake from sleep.
 
 ### TODO
 - [x] Automate new user creation process
-- [ ] Make system completely hands-free
+- [ ] Make system completely hands-free; may require more hardware
+- [ ] Avoid writing images to file
 
