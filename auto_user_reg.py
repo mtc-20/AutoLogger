@@ -25,6 +25,7 @@ with open('encodings.txt', 'rb') as f:
     known_face_encodings = pickle.load(f)
 
 def save_image(name):
+    print("[INFO] Loading camera...")
     cap = cv2.VideoCapture(0)
     width  = int(cap.get(cv2.cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -48,7 +49,7 @@ def save_image(name):
         y0, dy = (height - 80), 30
         for i, line in enumerate(text.split('\n')):
             y = y0 + i*dy
-            cv2.putText(frame, line, (10, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 2)
+            cv2.putText(frame, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 2)
 #        cv2.putText(frame, "Ensure face is within the Rectangle and press SPACE to confirm", (10,height-30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,200),1)
             
         cv2.imshow('frame', frame)
@@ -61,7 +62,7 @@ def save_image(name):
             #name = 'Thomas'
             img_name = "{}.jpg".format(name)
             cv2.imwrite(img_name, roi)
-            print("{} written!".format(img_name))
+            print("{}'s Visual ID written!".format(img_name))
             chk = True
             break
     cap.release()
@@ -82,17 +83,18 @@ def add_new_user():
         print("Please try again!")
         name = input("Please enter first name: ")
     
-    print("[INFO] No duplicate found...")
-    users.append(name)
+    print("[INFO] No duplicate found, proceeding...")
+    
     #cap = cv2.VideoCapture(0)
-    print("[INFO] Loading camera...")
+    
 #    result = save_image(name)
     # extract encodings
     if save_image(name):
         image_path = "faces/{}.jpg".format(name)
         img = face_recognition.load_image_file(image_path)
-        encoding=face_recognition.face_encodings(image)[0]
-        known_face_encodings.append(encoding) 
+        encoding=face_recognition.face_encodings(img)[0]
+        known_face_encodings.append(encoding)
+        users.append(name)
         
         print("[INFO] Registering user to database...")
     
@@ -110,5 +112,7 @@ def add_new_user():
         print("[INFO] User registration interrupted...")
         
     
-    
-add_new_user()        
+try:    
+    add_new_user()
+except: 
+    pass        
