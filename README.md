@@ -16,7 +16,8 @@ System currently requires keyboard to accept input/awake from sleep.
 ### TODO
 - [x] Automate new user creation process
 - [ ] Make system completely hands-free; may require more hardware
-- [ ] Avoid writing images to file
+- [ ] Avoid writing images to file: ?
+- [ ] Need to add code so that database is created if it doesn't exist 
 
 
 [cam]:https://www.raspberrypi.org/products/camera-module-v2/
