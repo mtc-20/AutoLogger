@@ -22,9 +22,9 @@ from datetime import datetime
 import math
 import time
 from auto_user_reg import *
-from auto_user_reg import users as workers
+from auto_user_reg import users as known_face_names
 
-print("List of existing users: ", users)
+#print("List of existing users: ", users)
 
 #faces=glob.glob("faces/*.jpg")
 ##print(faces)
@@ -44,7 +44,7 @@ print("List of existing users: ", users)
 #known_face_names=[]
 
 print("[INFO] Loading user database...")
-print(workers)
+print(known_face_names)
 #for face in faces:
 #    image=face_recognition.load_image_file(face)
 #    encoding=face_recognition.face_encodings(image)[0]
@@ -91,19 +91,19 @@ face_locations = []
 face_encodings = []
 face_names = []
 '''
-cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
-cv2.moveWindow('Video', 40, 40)
+#cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+#cv2.moveWindow('Video', 40, 40)
 while True:
     process_this_frame = True
     count=0
 #    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
     name='dummy'
 
-    user_input=input('Press u to create new user or \n Press y then [ENTER] to use me: \n')
+    user_input=input('\n Press u to create new user or \n Press y then [ENTER] to use me: \n')
     if user_input.lower() == 'u':
         add_new_user()
         
-    elif user_input=='y':
+    elif user_input =='y':
         video_capture = cv2.VideoCapture(0)
         video_capture.set(cv2.cv2.CAP_PROP_FPS, 1)
         while True:
@@ -160,7 +160,7 @@ while True:
                 cv2.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
                 font = cv2.FONT_HERSHEY_DUPLEX
                 cv2.putText(frame, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
-            if name in workers:
+            if name in known_face_names:
                 count+=1
                 if count==5:
                     break
@@ -183,7 +183,7 @@ while True:
         count_in=0
         count_out=0 
         cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
-        cv2.moveWindow('frame', 50, 40)
+        cv2.moveWindow('frame', 30, 40)
         
         while(True):
             try:    
@@ -252,7 +252,6 @@ while True:
                     end = tuple(approx[e][0])
                     far = tuple(approx[f][0])
                     pt= (100,180)
-                    strftime("%B")
                     
                     # find length of all sides of triangle
                     a = math.sqrt((end[0] - start[0])**2 + (end[1] - start[1])**2)

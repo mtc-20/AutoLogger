@@ -111,7 +111,7 @@ def add_new_user():
         print("[INFO] User registration interrupted...")
         
     
-try:    
-    add_new_user()
-except: 
-    pass        
+#try:    
+#    add_new_user()
+#except: 
+#    pass        
