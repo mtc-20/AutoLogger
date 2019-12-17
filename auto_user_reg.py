@@ -50,7 +50,6 @@ def save_image(name):
         for i, line in enumerate(text.split('\n')):
             y = y0 + i*dy
             cv2.putText(frame, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (200,0,0), 2)
-#        cv2.putText(frame, "Ensure face is within the Rectangle and press SPACE to confirm", (10,height-30),cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,200),1)
             
         cv2.imshow('frame', frame)
         k = cv2.waitKey(1) & 0xFF

@@ -22,28 +22,29 @@ from datetime import datetime
 import math
 import time
 from auto_user_reg import *
+from auto_user_reg import users as workers
 
 print("List of existing users: ", users)
 
-faces=glob.glob("faces/*.jpg")
-#print(faces)
-#print(faces[0].find('.'))
-#print(faces[0][5+1:10])
-# This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
-# other example, but it includes some basic performance tweaks to make things run a lot faster:
-#   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
-#   2. Only detect faces in every other frame of video.
-
-# PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
-# OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
-# specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
-
-# Get a reference to webcam #0 (the default one)
-known_face_encodings=[]
-known_face_names=[]
+#faces=glob.glob("faces/*.jpg")
+##print(faces)
+##print(faces[0].find('.'))
+##print(faces[0][5+1:10])
+## This is a demo of running face recognition on live video from your webcam. It's a little more complicated than the
+## other example, but it includes some basic performance tweaks to make things run a lot faster:
+##   1. Process each video frame at 1/4 resolution (though still display it at full resolution)
+##   2. Only detect faces in every other frame of video.
+#
+## PLEASE NOTE: This example requires OpenCV (the `cv2` library) to be installed only to read from your webcam.
+## OpenCV is *not* required to use the face_recognition library. It's only required if you want to run this
+## specific demo. If you have trouble installing it, try any of the other demos that don't require it instead.
+#
+## Get a reference to webcam #0 (the default one)
+#known_face_encodings=[]
+#known_face_names=[]
 
 print("[INFO] Loading user database...")
-
+print(workers)
 #for face in faces:
 #    image=face_recognition.load_image_file(face)
 #    encoding=face_recognition.face_encodings(image)[0]
@@ -64,7 +65,7 @@ print("[INFO] Loading user database...")
     
 
     
-print(known_face_names)
+#print(known_face_names)
     
 # Load a sample picture and learn how to recognize it.
 '''
@@ -95,7 +96,7 @@ cv2.moveWindow('Video', 40, 40)
 while True:
     process_this_frame = True
     count=0
-    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
+#    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
     name='dummy'
 
     user_input=input('Press u to create new user or \n Press y then [ENTER] to use me: \n')
@@ -182,7 +183,7 @@ while True:
         count_in=0
         count_out=0 
         cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
-        cv2.moveWindow('frame', 40, 40)
+        cv2.moveWindow('frame', 50, 40)
         
         while(True):
             try:    
