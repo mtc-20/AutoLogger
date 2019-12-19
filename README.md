@@ -16,6 +16,9 @@ System currently requires keyboard to accept input/awake from sleep.
 
 # GUI
 - A simple standby menu created using pygame and pygameMenu.
+```
+pip install pygame-menu
+```
 - Responds to both  mouse and keyboard
 
 ### TODO
