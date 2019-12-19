@@ -3,6 +3,7 @@
 
 **The Raspberry Pi uses face recognition to detect faces and recognise from existing database. Then, uses hand gesture detection to log in/out.**
 
+**This fork presents a GUI that should make it easier to use the autologger on the Touchscreen.**
 ## Hardware
 - [Raspberry Pi 3][pi]
 - [Raspberry Pi Camera V2][cam]
@@ -13,9 +14,13 @@ Text files are created daily to store check-in and check out of users with times
 
 System currently requires keyboard to accept input/awake from sleep.
 
+# GUI
+- A simple standby menu created using pygame and pygameMenu.
+- Responds to both  mouse and keyboard
+
 ### TODO
 - [x] Automate new user creation process
-- [ ] Make system completely hands-free; may require more hardware
+- [x] Make system "hands-free"; ~~may require more hardware~~
 - [ ] Avoid writing images to file: ?
 - [ ] Need to add code so that database is created if it doesn't exist 
 
