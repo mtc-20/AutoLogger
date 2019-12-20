@@ -10,16 +10,17 @@
 - [Raspberry Pi 7" Touchscreen][screen] with enclosure
 
 # Data Logging
-Text files are created daily to store check-in and check out of users with timestamps. The logging directory maintains a hierarchy based on year and month.
+- Text files are created daily to store check-in and check out of users with timestamps. The logging directory maintains a hierarchy based on year and month.
+- The logbook folder must be created manually
+- System requires a virtual keyboard installed for new username input
 
-System currently requires keyboard to accept input/awake from sleep.
 
 # GUI
 - A simple standby menu created using pygame and pygameMenu.
 ```
 pip install pygame-menu
 ```
-- Responds to both  mouse and keyboard
+- Responds to both  mouse,keyboard and touch screen
 
 ### TODO
 - [x] Automate new user creation process
