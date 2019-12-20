@@ -8,7 +8,7 @@ Created on Fri Dec 13 19:47:51 2019
 
 import pickle
 import cv2
-import face_recognition
+#import face_recognition
 
 import cv2
 import numpy as np
@@ -29,8 +29,8 @@ import time
 with open('users.txt', 'rb') as f:
     users = pickle.load(f) 
     
-with open('encodings.txt', 'rb') as f:
-    known_face_encodings = pickle.load(f)
+#with open('encodings.txt', 'rb') as f:
+#    known_face_encodings = pickle.load(f)
 
 def save_image(name):
     print("[INFO] Loading camera...")
