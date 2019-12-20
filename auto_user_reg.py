@@ -27,7 +27,7 @@ import time
     
 # This assumes the file already exists    
 with open('users.txt', 'rb') as f:
-    users = pickle.load(f) 
+    known_face_names = pickle.load(f) 
     
 with open('encodings.txt', 'rb') as f:
     known_face_encodings = pickle.load(f)
@@ -85,7 +85,7 @@ def add_new_user(name):
     # username entry
     #name = input("Please enter first name: ")
         
-    if name in users:
+    if name in known_face_names:
         print("Username [%s] already exists!!!" % name)
         print("Please try again!")
 #        name = input("Please enter first name: ")
@@ -102,12 +102,12 @@ def add_new_user(name):
         img = face_recognition.load_image_file(image_path)
         encoding=face_recognition.face_encodings(img)[0]
         known_face_encodings.append(encoding)
-        users.append(name)
+        known_face_names.append(name)
         
         print("[INFO] Registering user to database...")
     
         with open('users.txt', 'wb') as f:
-            pickle.dump(users, f)
+            pickle.dump(known_face_names, f)
         
         with open('encodings.txt', 'wb') as f:
             pickle.dump(known_face_encodings, f)
