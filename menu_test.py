@@ -6,6 +6,7 @@ Created on Thu Dec 19 09:34:19 2019
 @author: mtc-20
 """
 
+import os
 import pygameMenu
 import pygame
 from auto_user_reg import *
@@ -23,6 +24,11 @@ ABOUT = ['Autologger v0.1',
          'Author: @Spidey, @mtc-20',
          pygameMenu.locals.TEXT_NEWLINE,
          'Email: hsrwroboticsclub@gmail.com'.format(pygameMenu.__email__)]
+
+# Set window position
+x = 50
+y = 20
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 
 clock = None
 main_menu = None
