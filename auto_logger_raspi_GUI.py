@@ -35,7 +35,7 @@ COLOR_BACKGROUND = (20, 50, 30)
 FPS = 10
 WINDOW_SIZE = (640,480)
 ABOUT = ['Autologger v0.1',
-         'Author: @Spidey, @mtc-20',
+         'Author: @Spidey, @mtc-20, @quangnhat185',
          pygameMenu.locals.TEXT_NEWLINE,
          'Email: hsrwroboticsclub@gmail.com']
 
