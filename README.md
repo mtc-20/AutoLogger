@@ -11,8 +11,8 @@
 
 # Data Logging
 - Text files are created daily to store check-in and check out of users with timestamps. The logging directory maintains a hierarchy based on year and month.
-- The logbook folder must be created manually
-- System requires a virtual keyboard installed for new username input
+- The logbook folder must be created manually, otherwise the code returns an error.
+- System requires a virtual keyboard installed for new username input.
 ```
 sudo apt-get install matchbox-keyboard
 ```
@@ -22,7 +22,7 @@ sudo apt-get install matchbox-keyboard
 ```
 pip install pygame-menu
 ```
-- Responds to mouse,keyboard and touch screen
+- Responds to mouse, keyboard and touch screen.
 
 <p align="center">
   <img width="480" src="https://github.com/mtc-20/AutoLogger/blob/gui/Main_menu.png">
