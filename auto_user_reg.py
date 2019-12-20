@@ -29,8 +29,8 @@ import time
 with open('users.txt', 'rb') as f:
     users = pickle.load(f) 
     
-#with open('encodings.txt', 'rb') as f:
-#    known_face_encodings = pickle.load(f)
+with open('encodings.txt', 'rb') as f:
+    known_face_encodings = pickle.load(f)
 
 def save_image(name):
     print("[INFO] Loading camera...")
@@ -126,6 +126,7 @@ def sign_in():
     # Initialization
     process_this_frame = True
     count=0
+    entry = ''
 #    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
     name='dummy'
     video_capture = cv2.VideoCapture(0)
