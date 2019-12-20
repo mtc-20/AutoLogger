@@ -22,13 +22,14 @@ sudo apt-get install matchbox-keyboard
 ```
 pip install pygame-menu
 ```
-- Responds to both  mouse,keyboard and touch screen
+- Responds to mouse,keyboard and touch screen
 
 ### TODO
 - [x] Automate new user creation process
 - [x] Make system "hands-free"; ~~may require more hardware~~
-- [ ] Avoid writing images to file: ?
+~~- [ ] Avoid writing images to file: ?~~
 - [ ] Need to add code so that database is created if it doesn't exist 
+- [ ] Pressing the buttons multiple times sets up the event every time; which needs to be sorted out
 
 
 [cam]:https://www.raspberrypi.org/products/camera-module-v2/
