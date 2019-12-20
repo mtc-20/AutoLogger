@@ -4,6 +4,9 @@
 Created on Thu Dec 19 09:34:19 2019
 
 @author: mtc-20
+
+TODO: check logic for multiple entry; currently only signs in
+TODO: event callbacks logic needs to be rectfied; eg. if user double clicks 'Sign in' accidently, then the function is also called twice (added to queue)  
 """
 
 import pickle
@@ -15,15 +18,15 @@ from datetime import datetime
 import math
 import time
 
-import pygameMenu
 start = time.time()
+import pygameMenu
 import pygame
 end = time.time()
-print("[INFO] Time to load pygame: %.3f" %(end - start))
+print("[INFO] Time to load pygame and pygame-menu: %.3f" %(end - start))
 start = time.time()
 import face_recognition
 end = time.time()
-print("[INFO] Time to load pygame: %.3f" %(end - start))
+print("[INFO] Time to load face_recognition: %.3f" %(end - start))
 
 # SETTINGS
 BLACK = (0,0,0)
@@ -31,6 +34,8 @@ WHITE = (255,255,255)
 ORANGE = (255, 150, 10)
 MENU_BACKGROUND_COLOR = (228, 55, 36)
 COLOR_BACKGROUND = (20, 50, 30)
+x = 50
+y = 20
 
 FPS = 10
 WINDOW_SIZE = (640,480)
@@ -40,8 +45,6 @@ ABOUT = ['Autologger v0.1',
          'Email: hsrwroboticsclub@gmail.com']
 
 # Set window position
-x = 50
-y = 20
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 
 clock = None
@@ -50,16 +53,18 @@ screen = None
 #background = None
 
 # Add block to check for existence of file
-    
-# This assumes the file already exists    
+
+  
+# This assumes the file already exists
+print("[INFO] Loading user database...")     
 with open('users.txt', 'rb') as f:
     known_face_names = pickle.load(f) 
     
 with open('encodings.txt', 'rb') as f:
     known_face_encodings = pickle.load(f)
-
+print(known_face_names)
+ 
 # FUNCTION DEFINITIONS
-
 def save_image(name):
     print("[INFO] Loading camera...")
     cap = cv2.VideoCapture(0)
@@ -148,14 +153,11 @@ def add_new_user(name):
         print("[INFO] User registration interrupted...")
         
 def sign_in():
-    print("[INFO] Loading user database...")
-    print(known_face_names)
     
-    # Initialization
+    # INITIALIZATION
     process_this_frame = True
     count=0
-    entry = ''
-#    workers=['Abir','Quang', 'Thomas', 'Prof Hartanto'] 
+    entry = '' 
     name='dummy'
     video_capture = cv2.VideoCapture(0)
     video_capture.set(cv2.cv2.CAP_PROP_FPS, 2)
@@ -229,10 +231,7 @@ def sign_in():
     video_capture.release()
     cv2.destroyAllWindows()
     
-    # Data Logger
-    # TODO: should a person be allowed to log-in multiple times???
-    # 
-
+    # DATA LOGGING TO FILE
     now=datetime.now()
     log=os.listdir('logbook/')
     month=now.strftime("%B")
@@ -241,7 +240,6 @@ def sign_in():
     hour=str(now.hour)
     minute=str(now.minute)
     print(log)
-
 
     if month+' '+year not in log:
         os.mkdir('logbook/'+(now.strftime("%B")+' '+year))
@@ -295,8 +293,6 @@ def main_bg():
 #    screen.fill(BLACK)
 ##    screen.blit(background, background_rect)
   
-
-    
 
 def main(test=False):
     # GLOBALS
