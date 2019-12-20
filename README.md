@@ -3,7 +3,7 @@
 
 **The Raspberry Pi uses face recognition to detect faces and recognise from existing database. Then, uses hand gesture detection to log in/out.**
 
-**This fork presents a GUI that should make it easier to use the autologger on the Touchscreen.**
+**This fork presents a GUI that should make it easier to use the autologger with the Touchscreen.**
 ## Hardware
 - [Raspberry Pi 3][pi]
 - [Raspberry Pi Camera V2][cam]
@@ -13,7 +13,9 @@
 - Text files are created daily to store check-in and check out of users with timestamps. The logging directory maintains a hierarchy based on year and month.
 - The logbook folder must be created manually
 - System requires a virtual keyboard installed for new username input
-
+```
+sudo apt-get install matchbox-keyboard
+```
 
 # GUI
 - A simple standby menu created using pygame and pygameMenu.
