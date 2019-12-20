@@ -24,7 +24,9 @@ pip install pygame-menu
 ```
 - Responds to mouse, keyboard and touch screen.
 
-
+<p align="center">
+  <img width="480" src="https://github.com/mtc-20/AutoLogger/blob/gui/new_screenshot.png">
+</p>
 
 
 ### TODO
