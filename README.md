@@ -24,6 +24,11 @@ pip install pygame-menu
 ```
 - Responds to mouse,keyboard and touch screen
 
+<p align="center">
+  <img width="480" src="https://github.com/mtc-20/AutoLogger/blob/gui/Main_menu.png">
+</p>
+
+
 ### TODO
 - [x] Automate new user creation process
 - [x] Make system "hands-free"; ~~may require more hardware~~
