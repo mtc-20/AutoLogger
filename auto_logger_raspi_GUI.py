@@ -45,7 +45,8 @@ ABOUT = ['Autologger v0.1',
          'Email: hsrwroboticsclub@gmail.com']
 
 # Set window position
-os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
+# os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
+os.environ['SDL_VIDEO_CENTERED'] = "1"
 
 clock = None
 main_menu = None
@@ -307,6 +308,8 @@ def main(test=False):
     info = pygame.display.Info()
     WINDOW_SIZE = (info.current_w, info.current_h)
     screen = pygame.display.set_mode(WINDOW_SIZE)
+    # # To be used for final build (No close window buttons)
+    # screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     #screen.fill(BLACK)
     pygame.display.set_caption('Auto Logger')
     clock = pygame.time.Clock()
@@ -349,6 +352,7 @@ def main(test=False):
         pygame.display.flip()
 
         if test:
+            print("[INFO] Exitting system...")
             break
 
 if __name__ == '__main__':
