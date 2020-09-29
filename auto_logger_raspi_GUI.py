@@ -44,7 +44,9 @@ ABOUT = ['Autologger v0.1',
          'Email: hsrwroboticsclub@gmail.com']
 
 # Set window position
-os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
+x = 0
+y = 0
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 
 clock = None
 main_menu = None
