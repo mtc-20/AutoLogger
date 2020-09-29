@@ -34,8 +34,7 @@ WHITE = (255,255,255)
 ORANGE = (255, 150, 10)
 MENU_BACKGROUND_COLOR = (228, 55, 36)
 COLOR_BACKGROUND = (20, 50, 30)
-x = 50
-y = 20
+
 
 FPS = 10
 WINDOW_SIZE = (640,480)
@@ -45,8 +44,9 @@ ABOUT = ['Autologger v0.1',
          'Email: hsrwroboticsclub@gmail.com']
 
 # Set window position
-# os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
-os.environ['SDL_VIDEO_CENTERED'] = "1"
+x = 2
+y = 2
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x,y)
 
 clock = None
 main_menu = None
