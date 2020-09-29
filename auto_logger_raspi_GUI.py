@@ -21,7 +21,6 @@ import time
 start = time.time()
 import pygameMenu
 import pygame
-from pygame.locals import FULLSCREEN
 end = time.time()
 print("[INFO] Time to load pygame and pygame-menu: %.3f" %(end - start))
 start = time.time()
@@ -305,7 +304,9 @@ def main(test=False):
 
     # INITIALIZATION
     pygame.init()
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    info = pygame.display.Info()
+    WINDOW_SIZE = (info.current_w, info.current_h)
+    screen = pygame.display.set_mode(WINDOW_SIZE)
     #screen.fill(BLACK)
     pygame.display.set_caption('Auto Logger')
     clock = pygame.time.Clock()
